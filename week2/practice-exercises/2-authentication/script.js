@@ -1,15 +1,34 @@
-
 /**
  * 2. Authentication
- * 
+ *
  * Using node-fetch make an authenticated request to https://restapiabasicauthe-sandbox.mxapps.io/api/books
  * Print the response to the console. Use async-await and try/catch.
- * 
+ *
  * Hints:
  * - for basic authentication the username and password need to be base64 encoded
  */
+import express from 'express';
+import fetch from 'node-fetch';
+
 function printBooks() {
-  // YOUR CODE GOES IN HERE
+  const app = express();
+
+  app.get('/books', async (req, res) => {
+    try {
+      const response = await fetch(
+        'https://restapiabasicauthe-sandbox.mxapps.io/api/books',
+        {
+          headers: { Authorization: 'Basic YWRtaW46aHZnWDhLbFZFYQ==' },
+        },
+      );
+      const body = await response.json();
+      console.log(body);
+      res.json(body);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+  app.listen(3000, () => console.log('server running'));
 }
 
 printBooks();
