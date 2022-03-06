@@ -68,12 +68,10 @@ app.get('/blogs', (req, res) => {
     }
     //listing all files using forEach
     files.forEach((file) => {
-      if (path.extname(file) === '') {
-        if (file !== 'node_modules') {
-          const post = fs.readFileSync(file);
-          const addedPost = { title: file, post: post.toString('utf8') };
-          posts.push(addedPost);
-        }
+      if (path.extname(file) === '' && file !== 'node_modules') {
+        const post = fs.readFileSync(file);
+        const addedPost = { title: file, post: post.toString('utf8') };
+        posts.push(addedPost);
       }
     });
 
