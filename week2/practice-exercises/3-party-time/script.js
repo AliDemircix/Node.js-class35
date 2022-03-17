@@ -30,6 +30,7 @@ function makeReservation() {
       res.json(data);
     } catch (error) {
       console.log(error);
+      res.status(404).send(`An error occurred while fetching data ${error}`);
     }
   });
   app.listen(3000, () => console.log('Server Running'));

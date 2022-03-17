@@ -22,10 +22,10 @@ function printBooks() {
         },
       );
       const body = await response.json();
-      console.log(body);
       res.json(body);
     } catch (error) {
       console.log(error);
+      res.status(404).send('An error occurred while fetching data');
     }
   });
   app.listen(3000, () => console.log('server running'));
